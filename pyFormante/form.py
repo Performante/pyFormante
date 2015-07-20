@@ -3,7 +3,7 @@ from .exceptions import NotAFieldException
 import json
 
 
-class Form:
+class Form(object):
     def __init__(self, **kwargs):
         for key, value in kwargs.iteritems():
             if isinstance(value, Field):

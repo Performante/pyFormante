@@ -12,7 +12,7 @@ class InputType(Enum):
     time = 'time'
 
 
-class Field:
+class Field(object):
     def __init__(self, attr, type=InputType.text, validation=None):
         self.attr = attr
         self.data = None
@@ -34,7 +34,7 @@ class Field:
 
         validation = []
         for validator in self.validation:
-            validation.append(validator.to_string())
+            validation.append(validator.to_dict())
         dict['validation'] = validation
 
         return dict

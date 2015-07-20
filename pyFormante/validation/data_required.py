@@ -1,17 +1,16 @@
-class DataRequired:
-    def __init__(self):
-        pass
+from .validator import Validator
+from ..util import register_as_validator
 
+
+class DataRequired(Validator):
     __validator_name__ = 'data_required'
 
-    @staticmethod
-    def validate(data):
+    def validate(self, data):
         if isinstance(data, str) or isinstance(data, unicode):
             d = data.strip()
         else:
             d = data
         return d not in ['', None]
 
-    @staticmethod
-    def to_string():
-        return DataRequired.__validator_name__
+
+register_as_validator(DataRequired)

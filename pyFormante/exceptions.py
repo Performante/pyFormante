@@ -11,3 +11,10 @@ class NotAFieldException(Exception):
 
 class QueryMethodNotSetException(Exception):
     pass
+
+class ValidatorIncorrectException(Exception):
+    pass
+
+
+class ValidatorExistsException(Exception):
+    pass
