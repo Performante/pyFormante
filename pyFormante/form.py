@@ -7,6 +7,7 @@ class Form(object):
     def __init__(self, **kwargs):
         for key, value in kwargs.iteritems():
             if isinstance(value, Field):
+                setattr(value, '__form__', self)
                 setattr(self, key, value)
             else:
                 raise NotAFieldException()

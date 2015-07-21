@@ -18,6 +18,8 @@ class Field(object):
         self.data = None
         self.type = type
         self.validation = validation if validation is not None else []
+        for validator in self.validation:
+            setattr(validator, '__field__', self)
 
     def validate(self):
         errors = 0
