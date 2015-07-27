@@ -3,8 +3,9 @@ from .exceptions import ValidatorExistsException
 
 all_forms = {}
 all_validators = {}
-query_methods = []
 
+query = None
+query_all = None
 
 def get_form(form_name, object_id=None, form_data=None, to_dict=False, request=None, session=None):
     if form_name in all_forms:
@@ -48,8 +49,8 @@ def validate_field():
     pass
 
 
-def query_method():
-    if len(query_methods) > 0:
-        return query_methods[-1]
-    else:
-        raise Exception("Formante: Query method is not defined")
+# def query_method():
+#     if len(query_methods) > 0:
+#         return query_methods[-1]
+#     else:
+#         raise Exception("Formante: Query method is not defined")

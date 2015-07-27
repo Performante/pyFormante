@@ -1,11 +1,11 @@
-from .util import all_forms, query_methods, query_method
+import util
 from .exceptions import FormExistsException
 
 
 def has_formante_form(form_name):
     def wrap(cls):
-        if form_name not in all_forms:
-            all_forms[form_name] = cls
+        if form_name not in util.all_forms:
+            util.all_forms[form_name] = cls
             setattr(cls, '__form_name__', form_name)
         else:
             raise FormExistsException("Form name {} is already in use.".format(form_name))
@@ -14,7 +14,12 @@ def has_formante_form(form_name):
 
 
 def is_query_method(wrapped):
-    query_methods.append(wrapped)
+    util.query = wrapped
+    return wrapped
+
+
+def is_query_all_method(wrapped):
+    util.query_all = wrapped
     return wrapped
 
 
@@ -22,8 +27,7 @@ def form_generator(wrapped):
     def wrap(cls, object_id=None, form_data=None, request=None, session=None):
         form = wrapped(cls)
         if object_id is not None:
-            query = query_method()
-            obj = query(cls, object_id, request=request, session=session)
+            obj = util.query(cls, object_id, request=request, session=session)
             if obj is not None:
                 for field_name in form.__dict__.keys():
                     attribute_name = form.__dict__[field_name].attr
