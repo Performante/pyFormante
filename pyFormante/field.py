@@ -21,10 +21,10 @@ class Field(object):
         for validator in self.validation:
             setattr(validator, '__field__', self)
 
-    def validate(self):
+    def validate(self, request=None, session=None):
         errors = 0
         for validator in self.validation:
-            if not validator.validate(self.data):
+            if not validator.validate(self.data, request=request, session=session):
                 errors += 1
         return False if errors > 0 else True
 

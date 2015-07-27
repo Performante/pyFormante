@@ -6,15 +6,15 @@ all_validators = {}
 query_methods = []
 
 
-def get_form_data(form_name, object_id=None, to_string=False, request=None, session=None):
+def get_form(form_name, object_id=None, form_data=None, to_dict=False, request=None, session=None):
     if form_name in all_forms:
         cls = all_forms[form_name]
         form_method = getattr(cls, "__form__", None)
         if callable(form_method):
-            form = form_method(object_id=object_id, request=request, session=session)
-            return form.to_jsons() if to_string else form.to_dict()
+            form = form_method(object_id=object_id, form_data=form_data, request=request, session=session)
+            return form.to_dict() if (to_dict is not None and to_dict) else form
     else:
-        return json.dumps({}) if to_string else {}
+        return {} if (to_dict is not None and to_dict) else None
 
 
 def get_validator_from_data(data):

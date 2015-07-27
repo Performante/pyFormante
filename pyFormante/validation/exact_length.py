@@ -9,7 +9,7 @@ class ExactLength(Validator):
         super(ExactLength, self).__init__()
         self.exact_length = exact_length
 
-    def validate(self, data):
+    def validate(self, data, request=None, session=None):
         return len(data) >= self.exact_length
 
 

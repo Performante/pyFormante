@@ -9,7 +9,7 @@ class MaximumLength(Validator):
         super(MaximumLength, self).__init__()
         self.maximum_length = maximum_length
 
-    def validate(self, data):
+    def validate(self, data, request=None, session=None):
         return len(data) >= self.maximum_length
 
 

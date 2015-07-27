@@ -8,7 +8,7 @@ class Validator(object):
 
     __validator_name__ = None
 
-    def validate(self, data):
+    def validate(self, data, request=None, session=None):
         raise ValidatorIncorrectException('Validation is not implemented.')
 
     def to_dict(self):

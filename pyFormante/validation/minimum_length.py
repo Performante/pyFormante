@@ -9,7 +9,7 @@ class MinimumLength(Validator):
         super(MinimumLength, self).__init__()
         self.minimum_length = minimum_length
 
-    def validate(self, data):
+    def validate(self, data, request=None, session=None):
         return len(data) >= self.minimum_length
 
 

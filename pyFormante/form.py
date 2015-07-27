@@ -22,15 +22,15 @@ class Form(object):
                 fields.append(field)
         return fields
 
-    def validate(self):
+    def validate(self, field_name=None, request=None, session=None):
         errors = 0
         for field in self._fields:
-            if not field.validate():
+            if field_name is not None:
+                if field.__field_name__ != field_name:
+                    continue
+            if not field.validate(request=request, session=session):
                 errors += 1
         return False if errors > 0 else True
-
-    def validate_field(self, field_name):
-        pass
 
     def to_dict(self):
         return_dict = {}
