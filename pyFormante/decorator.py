@@ -19,11 +19,11 @@ def is_query_method(wrapped):
 
 
 def form_generator(wrapped):
-    def wrap(cls, object_id=None, form_data=None):
+    def wrap(cls, object_id=None, form_data=None, request=None, session=None):
         form = wrapped(cls)
         if object_id is not None:
             query = query_method()
-            obj = query(cls, object_id)
+            obj = query(cls, object_id, request=request, session=session)
             if obj is not None:
                 for field_name in form.__dict__.keys():
                     attribute_name = form.__dict__[field_name].attr

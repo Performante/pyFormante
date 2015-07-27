@@ -20,7 +20,8 @@ class Validator(object):
             raise ValidatorIncorrectException('Validator name is not set.')
 
         for key in self.__dict__.keys():
-            return_dict[key] = self.__dict__[key]
+            if key not in ['__field__']:
+                return_dict[key] = self.__dict__[key]
         return return_dict
 
     def to_jsons(self):
